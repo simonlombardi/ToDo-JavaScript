@@ -1,32 +1,69 @@
 const inputTarea = document.getElementById('input-tarea')
 const botonAgregarTarea = document.getElementById('boton-agregar-tarea')
 const listaTareas = document.getElementById("lista-tareas")
+let tareas = []
+
+class Tarea {
+    constructor(id, tarea, estado) {
+        this.id = id,
+        this.tarea = tarea,
+        this.estado = estado
+    }
+}
 
 const agregarTarea = () => {
-    const textoTarea = inputTarea.value
-    if (textoTarea === "") {
+    if (inputTarea.value === "") {
+        alert("Ingrese una tarea")
     }
-    else{
-        const elementoTarea = document.createElement("li")
-        elementoTarea.innerHTML = textoTarea
-        const botonEliminar = document.createElement("button")
-        botonEliminar.textContent = "X"
-        elementoTarea.appendChild(botonEliminar)
-        listaTareas.appendChild(elementoTarea)
+    else {
+        const tarea = new Tarea(Date.now(), inputTarea.value, "pendiente")
+        tareas.push(tarea)
+        renderizarTareas()
     }
     inputTarea.value = ""
 }
 
-listaTareas.addEventListener("click", (e) => {
-    if (e.target.tagName == "LI"){
-        e.target.classList.toggle("realizada")
+const eliminarTarea = (tareaID) => {
+    tareas = tareas.filter(tarea => tarea.id !== tareaID)
+    renderizarTareas()
+}
+
+const cambiarEstado = (tareaID) => {
+    const tareaCambiarEstado = tareas.find(tarea => tarea.id === tareaID)
+    if (tareaCambiarEstado.estado === 'pendiente'){
+        return tareaCambiarEstado.estado = 'realizado'
     }
-    else if (e.target.tagName == "BUTTON"){
-        e.target.parentElement.remove()
+    else if(tareaCambiarEstado.estado === 'realizado') {
+        return tareaCambiarEstado.estado = 'pendiente'
     }
-})
+}
+
+const renderizarTareas = () => {
+    listaTareas.innerHTML = ""
+    tareas.forEach(tarea => {
+        const contenedorTarea = document.createElement('div')
+        const elementoTarea = document.createElement('li')
+        elementoTarea.textContent = tarea.tarea
+        const botonEliminar = document.createElement('button')
+        botonEliminar.innerHTML = "X"
+        elementoTarea.dataset.tareaID = tarea.id
+        elementoTarea.dataset.estado = tarea.estado
+        contenedorTarea.appendChild(elementoTarea)
+        contenedorTarea.appendChild(botonEliminar)
+        botonEliminar.addEventListener("click", () => {
+            eliminarTarea(tarea.id)
+        })
+        elementoTarea.addEventListener("click", () => {
+            elementoTarea.classList.toggle(cambiarEstado(tarea.id))
+        })
+        listaTareas.appendChild(contenedorTarea)
+    })
+}
 
 botonAgregarTarea.addEventListener("click", (e) => {
     e.preventDefault()
     agregarTarea()
 })
+
+
+
