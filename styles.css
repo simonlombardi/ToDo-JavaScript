@@ -73,7 +73,7 @@ input[type="text"]:hover {
 
 }
 
-.elemento-tarea {
+.elemento-tarea-pendiente{
     background-color: #27BFD9;
     color: white;
     font-weight:700;

@@ -1,7 +1,7 @@
 const inputTarea = document.getElementById('input-tarea')
 const botonAgregarTarea = document.getElementById('boton-agregar-tarea')
 const listaTareas = document.getElementById("lista-tareas")
-let tareas = []
+let tareas = JSON.parse(localStorage.getItem('tareas')) || []
 
 class Tarea {
     constructor(id, tarea, estado) {
@@ -9,6 +9,10 @@ class Tarea {
         this.tarea = tarea,
         this.estado = estado
     }
+}
+
+const almacenarDatos = () => {
+    localStorage.setItem('tareas', JSON.stringify(tareas))
 }
 
 const agregarTarea = () => {
@@ -21,20 +25,24 @@ const agregarTarea = () => {
         renderizarTareas()
     }
     inputTarea.value = ""
+    almacenarDatos()
 }
 
 const eliminarTarea = (tareaID) => {
     tareas = tareas.filter(tarea => tarea.id !== tareaID)
     renderizarTareas()
+    almacenarDatos()
 }
 
 const cambiarEstado = (tareaID) => {
     const tareaCambiarEstado = tareas.find(tarea => tarea.id === tareaID)
+
     if (tareaCambiarEstado.estado === 'pendiente'){
         return tareaCambiarEstado.estado = 'realizado'
     }
     else if(tareaCambiarEstado.estado === 'realizado') {
-        return tareaCambiarEstado.estado = 'pendiente'
+        tareaCambiarEstado.estado = 'pendiente'
+        return "realizado"
     }
 }
 
@@ -45,12 +53,11 @@ const renderizarTareas = () => {
         contenedorTarea.classList.add("contenedor-tarea")
         const elementoTarea = document.createElement('li')
         elementoTarea.textContent = tarea.tarea
-        elementoTarea.classList.add("elemento-tarea")
+        elementoTarea.classList.add("elemento-tarea-pendiente")
         const botonEliminar = document.createElement('button')
         botonEliminar.classList.add("boton-eliminar")
         botonEliminar.innerHTML = "X"
         elementoTarea.dataset.tareaID = tarea.id
-        elementoTarea.dataset.estado = tarea.estado
         contenedorTarea.appendChild(elementoTarea)
         contenedorTarea.appendChild(botonEliminar)
         botonEliminar.addEventListener("click", () => {
@@ -69,4 +76,4 @@ botonAgregarTarea.addEventListener("click", (e) => {
 })
 
 
-
+renderizarTareas()
