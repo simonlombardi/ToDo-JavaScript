@@ -22,6 +22,7 @@ h2{
 .realizado{
     text-decoration: line-through;
     text-decoration-color: black;
+    text-decoration-thickness: 2.5px;
 }
 
 #lista-tareas{

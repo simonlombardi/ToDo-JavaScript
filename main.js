@@ -36,6 +36,7 @@ const eliminarTarea = (tareaID) => {
 
 const cambiarEstado = (e, tareaID) => {
     let tareaCambiarEstado = tareas.find(tarea => tarea.id === tareaID)
+    let indiceTarea = tareas.indexOf(tareaCambiarEstado)
 
     if (tareaCambiarEstado.estado === 'pendiente'){
         e.target.classList.add("realizado")
@@ -45,6 +46,10 @@ const cambiarEstado = (e, tareaID) => {
         e.target.classList.remove("realizado")
         tareaCambiarEstado.estado = "pendiente"
     }
+    const nuevaTarea = {...tareaCambiarEstado, estado: tareaCambiarEstado.estado}
+    tareas[indiceTarea] = nuevaTarea
+    console.log(tareas);
+    almacenarDatos()
 }
 
 const renderizarTareas = () => {
