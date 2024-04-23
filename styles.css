@@ -1,3 +1,63 @@
-.pendiente{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    font-family:"Roboto", sans-serif;
+    font-size: medium;
+    background-color: #2787D9;
+    color: whitesmoke;
+}
+h2{
+    font-size: 3em;
+    color: whitesmoke;
+}
+.contenedor-principal{
+    margin-top: 5%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.realizado{
     text-decoration: line-through;
+}
+
+#lista-tareas{
+    list-style-type: none;
+    user-select: none;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 250px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #27D93F;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #27BFD9;
+}
+
+input[type="text"]::placeholder {
+
+    color: whitesmoke;
+
+}
+
+input[type="text"]:hover {
+
+    border: 2px solid #27BFD9;
+
 }
