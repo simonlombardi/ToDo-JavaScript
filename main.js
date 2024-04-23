@@ -34,15 +34,16 @@ const eliminarTarea = (tareaID) => {
     almacenarDatos()
 }
 
-const cambiarEstado = (tareaID) => {
-    const tareaCambiarEstado = tareas.find(tarea => tarea.id === tareaID)
+const cambiarEstado = (e, tareaID) => {
+    let tareaCambiarEstado = tareas.find(tarea => tarea.id === tareaID)
 
     if (tareaCambiarEstado.estado === 'pendiente'){
-        return tareaCambiarEstado.estado = 'realizado'
+        e.target.classList.add("realizado")
+        tareaCambiarEstado.estado = "realizado"
     }
     else if(tareaCambiarEstado.estado === 'realizado') {
-        tareaCambiarEstado.estado = 'pendiente'
-        return "realizado"
+        e.target.classList.remove("realizado")
+        tareaCambiarEstado.estado = "pendiente"
     }
 }
 
@@ -54,6 +55,11 @@ const renderizarTareas = () => {
         const elementoTarea = document.createElement('li')
         elementoTarea.textContent = tarea.tarea
         elementoTarea.classList.add("elemento-tarea-pendiente")
+        if (tarea.estado === "pendiente"){
+        }
+        else if (tarea.estado === "realizado"){
+            elementoTarea.classList.add("realizado")
+        }
         const botonEliminar = document.createElement('button')
         botonEliminar.classList.add("boton-eliminar")
         botonEliminar.innerHTML = "X"
@@ -63,8 +69,8 @@ const renderizarTareas = () => {
         botonEliminar.addEventListener("click", () => {
             eliminarTarea(tarea.id)
         })
-        elementoTarea.addEventListener("click", () => {
-            elementoTarea.classList.toggle(cambiarEstado(tarea.id))
+        elementoTarea.addEventListener("click", (e) => {
+            cambiarEstado(e, tarea.id)
         })
         listaTareas.appendChild(contenedorTarea)
     })
