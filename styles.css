@@ -4,6 +4,7 @@
     font-size: medium;
     background-color: #2787D9;
     color: whitesmoke;
+    font-size: 18px;
 }
 h2{
     font-size: 3em;
@@ -20,17 +21,19 @@ h2{
 
 .realizado{
     text-decoration: line-through;
+    text-decoration-color: black;
 }
 
 #lista-tareas{
     list-style-type: none;
     user-select: none;
+    padding: 0;
 }
 
 input[type="text"] {
     padding: 10px;
     font-size: 16px;
-    border: 2px solid #ccc;
+    border: 2px solid whitesmoke;
     border-radius: 4px;
     margin-right: 10px;
     width: 250px;
@@ -51,13 +54,48 @@ button:hover {
 }
 
 input[type="text"]::placeholder {
-
     color: whitesmoke;
-
 }
 
 input[type="text"]:hover {
-
     border: 2px solid #27BFD9;
+}
 
+.boton-eliminar {
+    font-size: 1.3em;
+    height: 48px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+.elemento-tarea {
+    background-color: #27BFD9;
+    color: white;
+    font-weight:700;
+    height: 1.2em;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    width: 30em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+
+}
+
+.contenedor-tarea{
+    display: flex;
+    flex-direction: row;
+    
+}
+.contenedor-tareas{
+    display: flex;
+    flex-direction: row;
 }

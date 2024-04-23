@@ -42,9 +42,12 @@ const renderizarTareas = () => {
     listaTareas.innerHTML = ""
     tareas.forEach(tarea => {
         const contenedorTarea = document.createElement('div')
+        contenedorTarea.classList.add("contenedor-tarea")
         const elementoTarea = document.createElement('li')
         elementoTarea.textContent = tarea.tarea
+        elementoTarea.classList.add("elemento-tarea")
         const botonEliminar = document.createElement('button')
+        botonEliminar.classList.add("boton-eliminar")
         botonEliminar.innerHTML = "X"
         elementoTarea.dataset.tareaID = tarea.id
         elementoTarea.dataset.estado = tarea.estado
